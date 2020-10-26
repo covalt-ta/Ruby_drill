@@ -1,3 +1,195 @@
+# 問題 30---------------------------------------------
+# 以下の配列に任意の値が存在するかどうか、そして何番目に存在するのか、検索するコードを作成しましょう。
+# 添字が0の要素、つまり以下の配列における「1」は「配列の0番目に存在する」と表現します。
+
+# array=[1,3,5,6,9,10,13,20,26,31]
+# 任意の値が配列内に存在しない場合は、「値は配列内に存在しません」と表示し、
+# 存在する場合は、配列の何番目にあるかを表示してください。
+
+# 検索はバイナリーサーチ（2分割検索）を使用して行います。
+
+# バイナリーサーチ
+# ソート済みのリストや配列に入ったデータ（同一の値はないものとする）に対する検索を行うときに用いられる手法です。
+# まず、中央の値を確認し、検索したい値との大小関係を用いて、検索したい値が中央の値の右にあるか、左にあるかを判断します。
+# それを繰り返し、片側には存在しないことを確かめながら検索していく方法です。
+
+# 出力例
+# 検索したい数字を入力してください
+# 5
+# 5は配列の2番目に存在します
+
+
+# 自分の答え
+# def binary_search(array, number_of_elements)
+#   puts "検索したい数字を入力してください"
+#   search_num = gets.to_i
+
+#   center = (number_of_elements / 2).floor
+#   first = array.slice(0, center)
+#   latter = array.slice(center, number_of_elements)
+
+#   if search_num < array[center]
+#     count = 0
+#     first.each do |num|
+#       if search_num == num
+#         puts "#{search_num}は配列の#{count}番目に存在します"
+#         return
+#       end
+#       count += 1
+#     end
+#   elsif search_num < array[number_of_elements - 1]
+#     count = center
+#     latter.each do |num|
+#       if search_num == num
+#         puts "#{search_num}は配列の#{count}番目に存在します"
+#         return
+#       end
+#       count += 1
+#     end
+#   else
+#     puts "#{search_num}は配列の中に存在しません"
+#   end
+#   puts "#{search_num}は配列の中に存在しません"
+# end
+
+# array = [1,3,5,6,9,10,13,20,26,31]
+# number_of_elements = array.length
+
+# binary_search(array, number_of_elements)
+
+# # 回答
+# def binary_search(array, number_of_elements, target)
+#   left = 0
+#   right = number_of_elements - 1
+
+#   while left <= right
+#     center = (left + right) / 2
+#     if array[center] == target
+#       return center
+#     elsif array[center] < target
+#       left = center + 1
+#     else
+#       right = center - 1
+#     end
+#   end
+
+#   return -1
+# end
+
+# array=[1,3,5,6,9,10,13,20,26,31]
+# puts "検索したい数字を入力してください"
+# target = gets.to_i
+# number_of_elements = array.length
+
+# result = binary_search(array, number_of_elements, target)
+
+# if result == -1
+#   puts "#{target}は配列内に存在しません"
+# else
+#   puts "#{target}は配列の#{result}番目に存在します "
+# end
+
+# # binary_searchメソッドは、配列の何番目かを返すメソッドとして定義している
+# # 引数には、配列、要素数、検索数値を渡す
+# # メソッド内で、配列の最初の要素のインデックスをleft、最後の要素のインデックスをrightに定義する
+# # while文で、中央の値（leftとright）と一致したらメソッドを抜ける（戻りcenter）
+# # 中央の値より低い場合、大きい場合で条件分岐、中央の値から+1,-1をleft、raightに代入させて、while文を繰り返す
+# # 検索値が、leftとrightの中央の値と一致するか、しない場合には、中央の値より下か、上の範囲で、再び中央の値と比較を繰り返していく
+# # 配列内に検索値がない場合には、return -1で戻り値を設定する
+
+
+
+# 問題 29---------------------------------------------
+# 任意の3つの数値の合計を出力するメソッドを作りましょう。
+# ただし、同じ数が含まれている場合は
+# 合計にカウントされません。
+
+# 出力例：
+# lone_sum([1, 2, 3]) → 6
+# lone_sum([3, 2, 3]) → 2
+# lone_sum([3, 3, 3]) → 0
+
+# 自分の回答
+# def lone_sum(array)
+#   array_sum = []
+#   one = array[0]
+#   two = array[1]
+#   three = array[2]
+
+#   if one != two && one != three
+#     array_sum << one
+#   end
+
+#   if two != one && two != three
+#     array_sum << two
+#   end
+
+#   if three != one && three != two
+#     array_sum << three
+#   end
+#   puts array_sum.sum
+# end
+
+# lone_sum([1, 2, 3])
+# lone_sum([3, 2, 3])
+# lone_sum([3, 3, 3])
+
+# # 回答
+# def lone_sum(ary)
+#   # 配列から、重複しない要素のみ取り出す
+#   uniq_nums = []
+#   ary.each do |num|
+#     count = 0
+#     ary.each do |i|
+#       if num == i　
+#         count += 1
+#       end
+#     end
+#     if count < 2
+#       uniq_nums << num
+#     end
+#   end
+#
+#   # uniq_nums配列内の合計
+#   sum = 0
+#   uniq_nums.each do |unique_num|
+#     sum += unique_num
+#   end
+#   puts sum
+# end
+
+# ary.eachの中に、ary.eachを繰り返すことで、自身と、自身を含む全ての配列要素を比較している
+# 要素が一致した場合、カウントを上げるようにし、自分とのみ一致した場合では、カウントが1となり、その他の要素と重複していないことが検証できる
+# 重複した要素がない場合（カウントが1以下）、合計する為の配列に代入する
+
+
+# 問題 28---------------------------------------------
+
+# 銀行口座に10万円の預金残高があり、お金を引き出すプログラムを作成します。
+# ・お金を引き出すwithdrawメソッドを作成する
+# ・お金を引き出すと手数料110円かかり、「◯◯円引き落としました。残高は◯◯円です」と表示する（残高は手数料を引いた額を表示します）
+# ・引き落とし金額と手数料の合算が、預金残高より大きい場合は「残高不足です」と表示する
+
+# 自分の回答
+# def withdraw(balance, amount)
+#   fee = 110
+#   amount_fee = amount + fee
+#   if balance >= amount_fee
+#     balance = balance - amount_fee
+#     puts "#{amount}円引き落としました。残高は#{balance}円です"
+#   else
+#     puts "残高不足です"
+#   end
+# end
+
+# balance = 100000
+# puts "いくら引き落としますか？（手数料110円かかります）"
+# amount = gets.to_i
+# withdraw(balance, amount)
+
+# 回答
+# 上に同じ
+
 # 問題 27---------------------------------------------
 # 正の整数を入力します。その整数が、
 # 10の倍数（10,20,30...）からの差が2以内であるときはTrue
