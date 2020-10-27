@@ -1,3 +1,93 @@
+# 問題 32---------------------------------------------
+# 文字列"xyz"を含む任意の文字列があるとします。
+# 以下条件を満たすメソッドを作成しましょう。
+# xyzの前にピリオド（.）がない場合はTrueを出力
+# ピリオド（.）がある場合はFalseを出力
+# 上記2つの条件に当てはまらない場合はFalseを出力
+# ただし、'xyabcz'のような文字列は想定せず、'xyz'は連続して存在するものとします。詳細は以下の出力例を確認してください。
+
+# 出力例：
+# xyz_there('abcxyz') → True
+# xyz_there('abc.xyz') → False
+# xyz_there('xyz.abc') → True
+
+# def xyz_there(str)
+#   if str.include?(".xyz")
+#     puts "False"
+#   elsif str.include?("xyz")
+#     puts "True"
+#   else
+#     puts "False"
+#   end
+# end
+
+# xyz_there('abcxyz')
+# xyz_there('abc.xyz')
+# xyz_there('xyz.abc')
+
+# 回答
+# 上に同じ
+
+
+# 問題 31---------------------------------------------
+# 3桁の正の整数を入力します。その整数の「百の位・十の位・一の位の和」について、
+# 10の倍数（10,20,30...）からの差が
+# ・2以内であるときは"True"
+# ・それ以外は"10の倍数との差は○です"
+# と表示されるようにしましょう。
+
+# 出力例：
+# near_ten(117)→True
+# near_ten(123)→10の倍数との差は4です
+# near_ten(111)→10の倍数との差は3です
+
+# 百の位・十の位・一の位の和が6などの時に、「10の倍数との差は6です」と出力せずに、「10の倍数との差は4です」と10の倍数から近い方の差を出力するようにしてください。
+# また、0も10の倍数に含むものとします。
+
+# def near_ten(num)
+#   array = []
+#   3.times do |i|
+#     array << num.to_s.slice(i,1)
+#   end
+#   num_sum =  array.map(&:to_i).sum
+#   result = num_sum % 10
+
+#   if result <= 2 || result >= 8
+#     puts "True"
+#   elsif result >= 6
+#     puts "10の倍数との差は#{10 - result}です"
+#   else
+#     puts "10の倍数との差は#{result}です"
+#   end
+# end
+
+# near_ten(117)
+# near_ten(123)
+# near_ten(111)
+
+# # 回答
+# def near_ten(num)
+#   total = (num/100 % 10) + (num/10 % 10) + (num % 10)
+#   remainder = total % 10
+#   if remainder <= 2 || remainder >= 8
+#     puts "True"
+#   elsif remainder <= 5
+#     puts "10の倍数との差は#{remainder}です"
+#   else
+#     puts "10の倍数との差は#{10 - remainder}です"
+#   end
+# end
+
+# 3桁整数のそれぞれの位の求め方
+# ①(num/100 % 10) + (num/10 % 10) + (num % 10)によって、百の位・十の位・一の位をそれぞれ足し合わせています。
+# シンプル
+# ②文字列を一文字ずつの配列に変換するメソッドには.charsメソッドがある
+# "hello".chars => ["h", "e", "l", "l", "o"]
+# 数値の場合、文字列に変換して、数値に戻す方法で可能
+# 123.to_s.chars.map(&:to_i) => [1, 2, 3]
+# 123.to_s.chars => ["1", "2", "3"]
+# ＊charsメソッドは、文字列でないと使用できない
+
 # 問題 30---------------------------------------------
 # 以下の配列に任意の値が存在するかどうか、そして何番目に存在するのか、検索するコードを作成しましょう。
 # 添字が0の要素、つまり以下の配列における「1」は「配列の0番目に存在する」と表現します。
