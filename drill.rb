@@ -1,3 +1,254 @@
+# 問題 33---------------------------------------------
+# 以下の仕様を満たすアプリケーションを作成しましょう。また、注意書きを確認し、雛形を使用して実装してください。
+
+# 仕様
+# ・実行すると [1] : 点数を登録する, [2] : 点数を確認する, [3] : 終了する という選択肢を表示し、ユーザーに入力を求め、その入力に従い以下のような各処理を行う
+# ・アプリケーションを終了するまで、処理を繰り返す
+
+# [1]の処理
+# ・名前、年齢、国語・数学・英語の3教科の点数を入力させて、保存する
+
+# [2]の処理
+# ・投稿された情報から番号と名前で一覧を表示し（例 1: yamada）、見たい個人の番号の入力を求める
+# ・ 入力された個人の名前、年齢、国語・数学・英語の3教科の点数を表示する
+
+# [3]の処理
+# ・アプリケーションを終了する
+
+# 自分の回答
+# def registration_student(students)
+#   student = {}
+#   puts "生徒名を入力してください"
+#   student[:name] = gets.chomp
+#   puts "生徒の年齢を入力してください"
+#   student[:age] = gets.to_i
+#   puts "国語の得点は？"
+#   student[:country] = gets.to_i
+#   puts "数学の得点は？"
+#   student[:math] = gets.to_i
+#   puts "英語の得点は？"
+#   student[:english] = gets.to_i
+
+#   students << student
+# end
+
+# def show_student_name(students)
+#   if students.empty?
+#     puts "生徒が登録されていません"
+#     return
+#   end
+#   puts "みたい生徒の番号を入力してください"
+#   students.each_with_index do |student, i|
+#     puts "[#{i}]#{student[:name]}"
+#   end
+#   num = gets.to_i
+#   puts "名前：#{students[num][:name]}"
+#   puts "年齢：#{students[num][:age]}"
+#   puts "国語：#{students[num][:country]}"
+#   puts "数学：#{students[num][:math]}"
+#   puts "英語：#{students[num][:english]}"
+# end
+
+# students = []
+
+# while true
+#   puts "行いたい項目を選択してください"
+#   puts "[1]点数を登録する"
+#   puts "[2]点数を確認する"
+#   puts "[3]終了する"
+
+#   input = gets.to_i
+#   if input == 1
+#     registration_student(students)
+#   elsif input == 2
+#     show_student_name(students)
+#   elsif input == 3
+#     exit
+#   else
+#     puts "無効な数値です"
+#   end
+# end
+
+# # 回答
+# # ほぼ同じ
+
+# def registration_student(students)
+#   # 生徒の名前と年齢を登録できるようにする
+#   student = {}
+#   puts '生徒名を入力してください'
+#   student[:name] = gets.chomp
+#   puts '生徒の年齢を入力してください'
+#   student[:age] = gets.chomp
+
+#   # 登録した生徒の国語、数学、英語の点数を登録できるようにする
+#   puts "国語の得点は？"
+#   student[:japanese] = gets.to_i
+#   puts "数学の得点は？"
+#   student[:math] = gets.to_i
+#   puts "英語の得点は？"
+#   student[:english] = gets.to_i
+#   students << student
+
+# end
+
+# def show_student_name(students)
+#   # 登録された生徒の名前を番号を振って表示する
+#   i = 0
+#   students.each do |student|
+#     puts "#{i}: #{student[:name]}"
+#     i += 1
+#   end
+#   puts '見たい生徒の番号を入力してください'
+#   num = gets.to_i
+
+#   student = students[num]
+#   # 選択された生徒の名前、年齢、国語、数学、英語の点数を表示できるようにする
+#   puts "名前: #{student[:name]}"
+#   puts "年齢: #{student[:age]}"
+#   puts "国語: #{student[:japanese]}"
+#   puts "数学: #{student[:math]}"
+#   puts "英語: #{student[:english]}"
+# end
+
+# students = []
+
+# while true
+#   puts '行いたい項目を選択してください'
+#   puts '[1]点数を登録する'
+#   puts '[2]点数を確認する'
+#   puts '[3]終了する'
+#   input = gets.to_i
+#   if input == 1
+#     registration_student(students)
+#   elsif input == 2
+#     show_student_name(students)
+#   elsif input == 3
+#     exit
+#   else
+#     puts '無効な値です'
+#   end
+# end
+
+# ポイント
+# ハッシュへのキーとバリューの挿入方法
+# while true とすることで、trueの間繰り返される。抜けるにはexitを用いる
+
+
+# 問題 33---------------------------------------------
+# メソッドに3つの整数a b cを与えます。
+# ・「aとbの差が1」または「aとcの差が1」であり、かつ「bとcとの数値の差が2以上」の場合はTrue
+# ・それ以外はFalse
+# と出力するメソッドを作りましょう。
+
+# 出力例：
+# close_far(1, 2, 10) → True
+# close_far(1, 2, 3) → False
+# close_far(4, 1, 3) → True
+
+# # 自分の回答
+# def close_far(a, b, c)
+#   ab = (a - b).abs
+#   ac = (a - c).abs
+#   bc = (b - c).abs
+
+#   if (ab == 1 || ac == 1) && bc >= 2
+#     puts "True"
+#   else
+#     puts "False"
+#   end
+# end
+
+# close_far(1, 2, 10)
+# close_far(1, 2, 3)
+# close_far(4, 1, 3)
+
+# # 回答
+# def close_far(a,b,c)
+#   x = (a-b).abs
+#   y = (a-c).abs
+#   z = (b-c).abs
+
+#   if x == 1 && z >= 2
+#     puts "True"
+#   elsif y == 1 && z >= 2
+#     puts "True"
+#   else
+#     puts "False"
+#   end
+# end
+
+
+# 問題 33---------------------------------------------
+# 西暦の年数および月を入力し、その月の日数を求めるプログラムを書きます。
+# その場合、閏年について考慮する必要があります。
+
+# 閏年は以下の判断基準で決まります。
+
+# ①その西暦が4で割り切れたら閏年である
+# ②ただし、例外として100で割り切れる西暦の場合は閏年ではない
+# ③ただし、その例外として400で割り切れる場合は閏年である
+
+# つまり、西暦2000年は閏年であり、西暦2100年は閏年ではありません。
+# これらに対応できるように、出力例と雛形をもとに実装しましょう。
+
+# 出力例
+# 1990年2月 =>"1990年2月は28日間あります"
+# 2000年2月 =>"2000年2月は29日間あります"
+# 2100年2月 =>"2100年2月は28日間あります"
+# 2000年3月=>"2000年3月は31日間あります"
+
+# 自分の回答
+
+# def get_days(year, month)
+#   month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+#   # 閏年じゃない場合,又は閏年だけど2月じゃない場合
+#   if year % 4 != 0 || month != 2
+#     month_days[month - 1]
+#   # 閏年の可能性がある場合
+#   elsif year % 100 != 0 || year % 400 == 0
+#     month_days[month - 1] + 1
+#   else
+#     month_days[month - 1]
+#   end
+# end
+
+# puts "年を入力してください："
+# year = gets.to_i
+# puts "月を入力してください："
+# month = gets.to_i
+
+# days = get_days(year, month)
+# puts "#{year}年#{month}月は#{days}日間あります"
+
+# # 回答
+# def get_days(year, month)
+#   month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+#   if month == 2
+#     if year % 4 == 0
+#       if year % 100 == 0 && year % 400 != 0
+#         days = 28
+#       else
+#         days = 29
+#       end
+#     else
+#       days = 28
+#     end
+#   else
+#     days = month_days[month - 1]
+#   end
+
+#   return days
+# end
+
+# puts "年を入力してください："
+# year = gets.to_i
+# puts "月を入力してください："
+# month = gets.to_i
+
+# days = get_days(year, month)
+# puts "#{year}年#{month}月は#{days}日間あります"
+
+
 # 問題 32---------------------------------------------
 # 文字列"xyz"を含む任意の文字列があるとします。
 # 以下条件を満たすメソッドを作成しましょう。
