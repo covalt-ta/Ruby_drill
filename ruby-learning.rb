@@ -1,3 +1,110 @@
+# 【問題】数字の調査
+# あなたは 2 進数について勉強しました。
+# そこで、あなたは任意の数字の 2 進数表示のどの桁が 1 になるのか、もしくは 0 になるのかが気になりました。
+
+# 知りたい桁が複数指定されるので、その桁が 0 なのか 1 なのか判定するプログラムを作成してください。
+# 知りたい桁は、与えられた数字を 2 進数にしたときの桁数より小さいものとします。
+
+# 入力例 1 の場合、以下の図のように、与えられた数字は 44 であるので、2 進数にした場合 101100 になります。そして、出力する値は順番に、右から 4 番目、2 番目、6 番目の数字なので、1, 0, 1 の各番号に改行を含んだものとなります。
+# 知りたい桁数、知りたい10進数数字
+# 自分の回答
+# num, x = gets.split.map(&:to_i)
+# ary = []
+
+# num.times do |i|
+#   ary << gets.to_i # 配列に知りたい桁を順番に挿入
+# end
+
+# binary_ary = x.to_s(2).chars #2進数に変換して一文字ずつの配列にする
+
+# ary.each do |n|
+#   puts binary_ary.last(n).first
+# end
+
+
+# 【問題】ログのフィルター
+# あなたはサーバ管理者です。 日々洪水のように流れるログを追っています。
+# とうとう自分の目と頭では処理しきれない量になってしまったため、プログラムを作って、重要な文字列を含むログだけ抽出する事にしました。
+
+# 例えば、入力例 2 では、ログは上から順に "pizza"、 "paiza"、 "aizu"、 "ai"、 "sai" の 5 つです。
+# この 5 つのログに対して、重要な文字列 "ai" が含まれているのは "pizza" 以外の 4 つです。
+# 結果として "pizza" だけが除かれ、 "paiza"、 "aizu"、 "ai"、 "sai" がこの順に抽出されます。
+# 入力は以下のフォーマットで与えられます。
+# N
+# G
+# S_1
+# ...
+# S_N
+# ・1 行目には、文字列の数 N が整数で与えられます。
+# ・2 行目には、抽出する対象の重要な文字列 G が与えられます。
+# ・3 行目から続く N 行のうち i 行目 (1 ≦ i ≦ N)には、ログの内容であ
+
+# ary = []
+# count = 0
+
+# num = gets.to_i
+# target = gets.chomp
+
+# num.times do
+#   str = gets.chomp
+#   ary << str
+# end
+
+# ary.each do |str|
+#   if str.include?(target)
+#     puts str
+#     count += 1
+#   end
+# end
+# puts "None" if count == 0
+
+
+# 【問題】テストの採点
+# あなたは大学の講義を受講した学生の評価をしています。
+# 学生の成績はテストの点数から 欠席回数 × 5 点 を引いた点数とすることにしました。
+# 成績がマイナスとなった場合は 0 とします。
+
+# 学生のテストと欠席回数のデータが学籍番号順に与えられたとき、
+# 成績が合格点以上になっている学生の学籍番号を順に出力するプログラムを作成してください。
+# 学籍番号は 1 から順に与えられます。
+
+# 入力は以下のフォーマットで与えられます。
+# N M
+# a_1 b_1
+# a_2 b_2
+# ...
+# a_N b_N
+# ・1 行目に学生の人数を表す整数 N と合格点を表す整数 M が半角スペース区切りで与えられます。
+# ・続く N 行のうち i 行目 (1 ≦ i ≦ N ) には学籍番号 i の学生のテストの点数を表す整数 a_i、欠席回数を表す整数 b_i が半角スペース区切りで与えられます。
+# ・入力は合計で N + 1 行であり、入力値最終行の末尾に改行が 1 つ入ります。
+
+
+# students = [] # 学生を配列でまとめる
+# num, pass = gets.split.map(&:to_i)
+
+# num.times do |i|
+#   student = [] # 学生
+#   i += 1
+#   point, absence = gets.split.map(&:to_i) # 点数と欠席回数を入力
+#   student.push(i, point, absence) # 学籍番号、点数、欠席回数の順で挿入
+#   students << student # studentsに学生データを挿入
+# end
+
+# def check(students, pass)
+#   students.each do |student|
+#     demerit = student[2] * 5 # 欠席の減点を計算
+#     score = student[1] - demerit # 減点を調整した点数を計算
+#     score = 0 if score < 0 # 点数がマイナスの場合、0点とする
+
+#     if score >= pass
+#       puts student[0]
+#     end
+#   end
+# end
+
+# check(students, pass)
+
+
 # 【問題】ミニコンピュータ
 #あなたの友人である K 氏は電子工作が大好きです。
 # 彼は毎晩試行錯誤を重ね、最近ついにコンピュータのミニチュア版を開発することに成功しました。
@@ -13,29 +120,28 @@
 # コンピュータが完成して嬉しそうな彼の頼みを断るわけにはいきません。
 
 # 自分の回答
-order = []
-a = 0
-b = 0
+# order = []
+# a = 0
+# b = 0
 
-num = gets.to_i
-num.times { order << gets.chomp.split }
+# num = gets.to_i
+# num.times { order << gets.chomp.split }
 
-order.each do |n|
-  if n[0] == "SET"
-    if n[1] == "1"
-      a = n[2].to_i
-    elsif n[1] == "2"
-      b = n[2].to_i
-    end
-  elsif n[0] == "ADD"
-    b = a + n[1].to_i
-  elsif n[0] == "SUB"
-    b = a - n[1].to_i
-  end
-end
+# order.each do |n|
+#   if n[0] == "SET"
+#     if n[1] == "1"
+#       a = n[2].to_i
+#     elsif n[1] == "2"
+#       b = n[2].to_i
+#     end
+#   elsif n[0] == "ADD"
+#     b = a + n[1].to_i
+#   elsif n[0] == "SUB"
+#     b = a - n[1].to_i
+#   end
+# end
 
-puts "#{a} #{b}"
-
+# puts "#{a} #{b}"
 
 
 # 【問題】枠で囲む
