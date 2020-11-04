@@ -1,3 +1,145 @@
+# 【問題】株の売買
+# あなたは、株の売買でのお金儲けを考えています。
+# N 日の間、1 日に一度株価をチェックし、以下のルールに従い売買をします。
+
+# ・株価が c_1 円以下の場合、1 株買う
+# ・株価が c_2 円以上の場合、持ち株「を」すべて売る
+# ・株価が c_1 円、c_2 円の間の場合は、何もしない
+# ・N 日目には、上記を行わず持ち株をすべて売る
+
+# 入力は以下のフォーマットで与えられます。
+# N c_1 c_2
+# p_1
+# p_2
+# ...
+# p_N
+# ・1 行目には、株を売買する日数を表す整数 N、株の売買条件を表す整数 c_1, c_2 がこの順で半角スペース区切りで与えられます。
+# ・続く N 行のうちの i 行目 (1 ≦ i ≦ N) には、i 日目の株価を表す整数 p_i が与えられます。
+
+# prices = [] # 株価
+# purchases = [] # 購入した株価
+# disposal = [] # 売却益
+
+# def buy_and_sell(prices, price_a, price_b, purchases, disposal)
+#   prices.each_with_index do |price, i|
+#     # 最終日の場合、保有株を全て売却する
+#     if i == prices.length - 1
+#       purchases.each do |purchase|
+#         disposal << (price - purchase) if purchases
+#       end
+#     # 最終日ではない場合
+#     else
+#       # 購入ラインの株価以下の場合、購入する（purchasesに値を挿入する）
+#       if price <= price_a
+#         purchases << price
+#       # 売却ラインの株価以上の場合、全ての損益計算し（disposalに挿入）、売却する（purchasesの初期化）
+#       elsif price >= price_b && purchases
+#         purchases.each do |purchase|
+#           disposal << (price - purchase)
+#         end
+#         purchases = [] # 初期化
+#       end
+#     end
+#   end
+#   puts disposal.sum
+# end
+
+# num, price_a, price_b = gets.split.map(&:to_i)
+# num.times do
+#   price = gets.to_i
+#   prices << price
+# end
+
+# buy_and_sell(prices, price_a, price_b, purchases, disposal)
+
+# # 配列の要素の削除
+# 配列.delete(削除する要素)
+# 配列.delete_at(削除する位置)
+# 配列.shift(先頭から削除する要素の数)
+# 配列.slice!(削除開始位置, 削除する長さ)
+
+
+
+# 【問題】簡易カードゲーム
+# あなたは、1 から 9 の数字が書かれたカードを用いて、簡易的なポーカーで遊ぶことにしました。
+# この簡易ポーカーでは手札が 4 枚で、この 4 枚の組み合わせにより以下の 5 種類の役が存在します。
+
+# num = gets.to_i
+# cards = []
+
+# num.times do
+#   card = gets.chomp
+#   cards << card
+# end
+
+# cards.each do |card|
+#   count = 0
+#   card.chars.each do |n|
+#     card.chars.each do |x|
+#       if n == x
+#         count += 1
+#       end
+#     end
+#   end
+#   if count == 16
+#     puts "Four Card"
+#   elsif count == 10
+#     puts "Three Card"
+#   elsif count == 8
+#     puts "Two Pair"
+#   elsif count == 6
+#     puts "One Pair"
+#   elsif count == 4
+#     puts "No Pair"
+#   end
+# end
+
+# 【問題】先生の宿題
+# あなたは小学校一年生の先生です。今週の授業で、足し算と引き算を教えます。あなたは、足し算と引き算を用いた宿題を作る必要があり、そのためのプログラムを書くことにしました。
+# 以下の手順で問題をランダム生成するプログラムはもうできているのですが、その答えを求めるプログラムはまだできていません。答えを求めるプログラムを書いてください。
+
+# [問題生成の手順]
+# 1. 正しい式 a + b = c, あるいは a - b = c (a, b, c, は整数) を生成する
+# 2. a, b, c のうちいずれか 1 つを空欄にする
+
+# この空欄に入れるべき整数が「答え」となります。
+# ここに、足し算、引き算の問題について例を一つずつ示します。
+
+
+# 入力は以下のフォーマットで与えられます。
+# a op b = c
+# ・文字 a, op, b, "=" (半角等号), c がこの順に半角スペース区切りで与えられ、これらの並びが 1 つの問題を表します。
+# 　・op には足し算あるいは引き算を表す記号が入ります。
+# 　・a, b, c は "x" (英字小文字), "0", "1",..., "9" のうちいずれかで、"x" は空欄を表します。
+# 入力値最終行の末尾に改行が１つ入ります。
+
+# a, op, b, e, c = gets.split
+
+# def calc(a,op,b,c)
+#   if "x" == a
+#     if op == "+"
+#       c.to_i - b.to_i
+#     elsif op == "-"
+#       c.to_i + b.to_i
+#     end
+#   elsif "x" == b
+#     if op == "+"
+#       c.to_i - a.to_i
+#     elsif op == "-"
+#       a.to_i - c.to_i
+#     end
+#   elsif "x" == c
+#     if op == "+"
+#       a.to_i + b.to_i
+#     elsif op == "-"
+#       a.to_i - b.to_i
+#     end
+#   end
+# end
+
+# puts calc(a,op,b,c)
+
+
 # 【問題】数字の調査
 # あなたは 2 進数について勉強しました。
 # そこで、あなたは任意の数字の 2 進数表示のどの桁が 1 になるのか、もしくは 0 になるのかが気になりました。
