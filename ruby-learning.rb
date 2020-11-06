@@ -1,3 +1,235 @@
+# 【問題】繰り上がりのない計算
+
+# 定義
+result = []
+
+# 入力
+num_a, num_b = gets.split.map(&:to_i)
+
+# 出力
+ary_a = (num_a.to_s).chars.map(&:to_i)
+ary_b = (num_b.to_s).chars.map(&:to_i)
+a_count = ary_a.length
+b_count = ary_b.length
+
+if a_count >= b_count
+  a_count.times do
+    unless ary_b.empty?
+      result << (ary_a.pop + ary_b.pop) % 10
+    else
+      result << ary_a.pop
+    end
+  end
+else
+  b_count.times do
+    unless ary_a.empty?
+      result << (ary_b.pop + ary_a.pop) % 10
+    else
+      result << ary_b.pop
+    end
+  end
+end
+
+puts result.reverse.map(&:to_s).join
+
+# 解き方の概要
+# 入力数値A,Bを文字列に変換し、一文字ずつの配列に変換、その後に再度数値に変換する
+# => 入力数値が一桁ずつの格納された配列A,Bをつくる
+# 配列数の多い方(桁数の多い)の要素回数分、配列A、Bそれぞれの末尾から順に足す（popメソッドを使用）
+# 上記の結果に「% 10」とすることで、足し算結果の1の位だけを取得し、出力用の配列に挿入する
+# 配列から空になった場合には、残っている方の配列だけを出力用の配列に挿入する
+# 足した結果の1の位を結果の配列に挿入する
+# 出力用の配列を降順に変換（reversメソッド）、文字列変換（.map(&:to_s)メソッド）、要素結合（joinメソッド）し、出力
+
+# よく使用するメソッド
+# 文字列に変換 => .to_s
+# 数値に変換 => .to_i
+# 文字列を一文字ずつを要素とする配列に変換 => .chars
+# 配列の数値要素を文字列に変換する => .map(&:to_s)
+# 配列の文字要素を数値に変換する => .map(&:to_i)
+# 数値を一桁ずつの配列に変換する => num.to_s.chars.map(&:to_i)
+# 配列の要素を結合する（文字列） => .join
+# joinメソッドは引数に渡した文字を結合部分に挿入する => ["おは", "よう"].join("-") =>"おは-よう"
+# 小数点以下の切り捨て => .floor
+
+
+# 【問題】レポート評価
+# あなたはパイザ大学の教授です。学生に課したレポートを評価するため、あなたは自動でレポートの評価をするプログラムを考えることにしました。
+
+# 今回あなたが出題したレポートには n 問の問題があり、1 問あたりの配点はそれぞれ 100 / n 点です。ここで n は 100 の約数です。
+
+# あなたはレポートに提出期限を設けていました。提出期限から遅れたレポートのうち、遅れた日数が 9 日以下のレポートは得点を 8 割にすることにしました。
+# このとき得点に小数点以下が発生した場合切り捨てます。10 日以上遅れたレポートの評価は 0 点とすることにしました。
+
+
+# # 定義
+# students = []
+# result = []
+
+# # 入力
+# num, test_num = gets.split.map(&:to_i)
+
+# num.times do
+#   student = gets.split.map(&:to_i)
+#   students << student
+# end
+
+# point = 100 / test_num
+
+# # 出力
+# students.each do |student|
+#   score = point * student[1]
+#   if student[0] >= 10
+#     result << 0
+#   elsif student[0] >= 1
+#     result << (score * 0.8).floor
+#   else
+#     result << score
+#   end
+# end
+
+# result.each do |n|
+#   if n >= 80
+#     puts "A"
+#   elsif n >= 70
+#     puts "B"
+#   elsif n >= 60
+#     puts "C"
+#   else
+#     puts "D"
+#   end
+# end
+
+
+
+# 【問題】試験の合格判定
+# 総合力を重視する大学の入試では 1 次試験 (英語、数学、理科、国語、地理歴史の 5 科目で各 100 点満点) の成績で2段階選抜を行います。
+# 2段階選抜を通過する条件は以下のようになっています。
+# 全科目の合計得点が 350 点以上
+# 理系の受験者の場合は理系 2 科目 (数学、理科) の合計得点が 160 点以上
+# 文系の受験者の場合は文系 2 科目 (国語、地理歴史) の合計得点が 160 点以上
+# 受験者それぞれの各科目の点数が入力されるので、何人2段階選抜を通過できるかを求めてください。
+
+# 自分の回答（不正解。出力結果はあっているが、どこに原因があるのかわからず、、）
+# 定義
+# students = []
+# pass = []
+
+# # 入力
+# num = gets.to_i
+# num.times do
+#   student = gets.split
+#   students << student
+# end
+
+# # 出力
+# students.each do |student|
+#   point =  student[1..5].map(&:to_i).sum
+#   if point >= 350
+#     if student[0] == "l"
+#       l_point = student[4, 5].map(&:to_i).sum
+#       pass << student if l_point >= 160
+#     elsif student[0] == "s"
+#       s_point = student[2, 3].map(&:to_i).sum
+#       pass << student if s_point >= 160
+#     end
+#   end
+# end
+# puts pass.length
+
+# 【問題】壊れかけのキーボード
+# あなたは、壊れかけのキーボードを持っています。
+# しかしあなたは気にせずキーボードを使い続けるので、ついにキーボードが壊れてしまいました。
+
+# キーにはそれぞれ耐久度があります。耐久度は、キーを打つと、そのキーの耐久度が 1 減ります。
+# 耐久度が 0 になると、そのキーは入力しても何も出力しないボタンになってしまいます。
+
+# そのため、あなたは自分が入力した文章とティスプレイに出ている文章が違うことに気づきました。
+
+# 各キーの耐久度と入力した文章が与えられるので、ディスプレイに映された文字列を出力するプログラムを書いてください。
+
+# ただし、キーボードはアルファベットのみを入力するために用いるものとします。
+
+# # 入力
+# count = gets.split.map(&:to_i)
+# ary = (gets.chomp).chars
+
+# # 定義
+# alpha = ('a'..'z').to_a #アルファベットの配列
+# hash = {} # アルファベットと残数をハッシュで定義用のハッシュ
+# result = [] # 出力用の配列
+
+# # アルファベットをキー、残り回数をバリューとしたハッシュを作成
+# alpha.each_with_index do |s, i|
+#   hash[s] = count[i]
+# end
+
+# # 入力文字列（一文字ずつの配列）の一文字ずつに対して、残り回数が0でなければ出力配列（result）に格納
+# ary.each do |str|
+#   if hash[str] != 0
+#     result << str
+#     hash[str] -= 1 # 残り回数を減らしておく
+#   end
+# end
+
+# puts result.join # 文字列配列を繋げる
+
+# # 入力
+# アルファベットごとの出力できる数字
+# 文字列
+
+# # 出力
+# 一文字ずつ、残りの回数が0でなければ、配列の入れる
+# 残りの回数を一つ減らす
+
+
+
+# 【問題】文章サイズの変更
+# Paiza 君はデスクトップアプリケーションを開発しています。Paiza 君は、そのアプリケーションに、
+# ウィンドウのサイズを変更すると文章表示部分の大きさも同様に変更され、文章表示部分の幅に合わせて自然に改行されるという機能をつけようと考えています。
+# Paiza 君の代わりに、現在の文章表示部分の高さと幅、及び変更後の幅を元に、新しく表示される文章を表示するプログラムを作成してください。
+
+# 入力例 1 の場合、以下の図のように高さが 6 行、幅が 8 文字の文章が与えられています。
+# そこで、一度、一つの文字列とし、幅が 6 文字で改行することにより、出力例 1 のように出力することになります。
+
+
+# # 入力
+# ary = []
+# h, w, w_new = gets.split.map(&:to_i)
+# h.times do
+#   str = gets.split
+#   ary << str
+# end
+
+# # 定義
+# x = (h * w) % w_new
+# h_new = 0
+
+# # 出力
+# str = ary.join
+# if x == 0
+#   h_new = (h * w) / w_new
+# elsif x != 0
+#   h_new = ((h * w) / w_new )+ 1
+# end
+
+# h_new.times do |i|
+#   puts str.slice!(0..(w_new - 1))
+# end
+
+
+# 【問題】ピラミッドの作り方
+# あなたのクラスでは、運動会の出し物で人間ピラミッドをやることになりました。
+# ある段数のピラミッドを組むのに必要な人数を求めるプログラムをつくりましょう。
+# ピラミッドでは以下のように上から i 段目には i 人が必要となります。
+
+# num = gets.to_i
+# x = 0
+# num.times do |i|
+#   x += i + 1
+# end
+# puts x
+
 # 【問題】株の売買
 # あなたは、株の売買でのお金儲けを考えています。
 # N 日の間、1 日に一度株価をチェックし、以下のルールに従い売買をします。
@@ -25,7 +257,7 @@
 #     # 最終日の場合、保有株を全て売却する
 #     if i == prices.length - 1
 #       purchases.each do |purchase|
-#         disposal << (price - purchase) if purchases
+#         disposal << (price - purchase)
 #       end
 #     # 最終日ではない場合
 #     else
