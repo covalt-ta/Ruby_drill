@@ -1,36 +1,60 @@
-# 【問題】繰り上がりのない計算
+# 【問題】食事のカロリー計算
 
-# 定義
-result = []
+n, s_n = gets.split.map(&:to_i)
+foods = []
+students = []
 
-# 入力
-num_a, num_b = gets.split.map(&:to_i)
-
-# 出力
-ary_a = (num_a.to_s).chars.map(&:to_i)
-ary_b = (num_b.to_s).chars.map(&:to_i)
-a_count = ary_a.length
-b_count = ary_b.length
-
-if a_count >= b_count
-  a_count.times do
-    unless ary_b.empty?
-      result << (ary_a.pop + ary_b.pop) % 10
-    else
-      result << ary_a.pop
-    end
-  end
-else
-  b_count.times do
-    unless ary_a.empty?
-      result << (ary_b.pop + ary_a.pop) % 10
-    else
-      result << ary_b.pop
-    end
-  end
+n.times do
+  foods << gets.to_i
 end
 
-puts result.reverse.map(&:to_s).join
+s_n.times do
+  student = gets.split.map(&:to_i)
+  students << student
+end
+
+students.each do |student|
+  total = 0
+  student.each_with_index do |g, i|
+    total += ((g * foods[i]) / 100 ).floor
+  end
+  puts total
+end
+
+
+# 【問題】繰り上がりのない計算
+
+# # 定義
+# result = []
+
+# # 入力
+# num_a, num_b = gets.split.map(&:to_i)
+
+# # 出力
+# ary_a = (num_a.to_s).chars.map(&:to_i)
+# ary_b = (num_b.to_s).chars.map(&:to_i)
+# a_count = ary_a.length
+# b_count = ary_b.length
+
+# if a_count >= b_count
+#   a_count.times do
+#     unless ary_b.empty?
+#       result << (ary_a.pop + ary_b.pop) % 10
+#     else
+#       result << ary_a.pop
+#     end
+#   end
+# else
+#   b_count.times do
+#     unless ary_a.empty?
+#       result << (ary_b.pop + ary_a.pop) % 10
+#     else
+#       result << ary_b.pop
+#     end
+#   end
+# end
+
+# puts result.reverse.map(&:to_s).join
 
 # 解き方の概要
 # 入力数値A,Bを文字列に変換し、一文字ずつの配列に変換、その後に再度数値に変換する
